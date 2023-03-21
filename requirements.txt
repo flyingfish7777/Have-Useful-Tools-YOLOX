@@ -1,0 +1,20 @@
+# TODO: Update with exact module version
+numpy
+torch>=1.7
+opencv_python
+loguru
+tqdm
+torchvision
+thop
+ninja
+tabulate
+psutil
+tensorboard
+seaborn
+grad_cam==1.4.3
+
+# verified versions
+# pycocotools corresponds to https://github.com/ppwwyyxx/cocoapi
+pycocotools>=2.0.2
+onnx>=1.13.0
+onnx-simplifier==0.4.10
