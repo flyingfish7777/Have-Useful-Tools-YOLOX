@@ -1,28 +1,98 @@
 <div align="center"><img src="assets/logo.png" width="350"></div>
-<img src="assets/demo.png" >
-
-## Introduction
-YOLOX is an anchor-free version of YOLO, with a simpler design but better performance! It aims to bridge the gap between research and industrial communities.
-For more details, please refer to our [report on Arxiv](https://arxiv.org/abs/2107.08430).
-
-This repo is an implementation of PyTorch version YOLOX, there is also a [MegEngine implementation](https://github.com/MegEngine/YOLOX).
-
-<img src="assets/git_fig.png" width="1000" >
 
 ## Updates!!
-* 【2023/02/28】 We support assignment visualization tool, see doc [here](./docs/assignment_visualization.md).
-* 【2022/04/14】 We support jit compile op.
-* 【2021/08/19】 We optimize the training process with **2x** faster training and **~1%** higher performance! See [notes](docs/updates_note.md) for more details.
-* 【2021/08/05】 We release [MegEngine version YOLOX](https://github.com/MegEngine/YOLOX).
-* 【2021/07/28】 We fix the fatal error of [memory leak](https://github.com/Megvii-BaseDetection/YOLOX/issues/103)
-* 【2021/07/26】 We now support [MegEngine](https://github.com/Megvii-BaseDetection/YOLOX/tree/main/demo/MegEngine) deployment.
-* 【2021/07/20】 We have released our technical report on [Arxiv](https://arxiv.org/abs/2107.08430).
+* 【2023/03/21】 I  add Confusion matrix F1_curve P_curve PR_curve R_curve Grad-CAM in YOLOX  新增了混淆矩阵PR曲线F1曲线热力图等东西
+## 中文说明    （Instructions in English are below）
 
-## Coming soon
-- [ ] YOLOX-P6 and larger model.
-- [ ] Objects365 pretrain.
-- [ ] Transformer modules.
-- [ ] More features in need.
+安装yolox 和一般yolox一样
+```shell
+cd YOLOX
+pip3 insatll yolox -v -e.
+```
+
+如果你想使用 热力图，记得修改Grad_CAM下的base_cam.py   修改后的 base_cam.py已经放在主目录下
+
+热力图使用方法如下：
+
+一次目前只能生成一张  
+
+修改热力图保存路径，以及选择显示热力图为模型的哪一层，请修改yolox/utils/draw_cam.py demo.py 具体参数需要自己修改
+target_layer 可以修改显示的层 
+cv2.imwrite(f'/xxxx/xxx/xxxx', visualization) 可以修改保存路径。
+
+
+!!!!!注意目前只支持test_size=640*640 
+
+```shell
+python tools/demo.py image 
+```
+
+混淆矩阵以及PR等曲线输出方法   eval.py 具体参数需要自己修改
+```shell
+python tools/eval.py
+```
+
+生成图片的保存路径在yolox/evaluators/coco_evaluator.py save_dir = "xxxxxxx" 中修改
+
+存在的问题，混淆矩阵以及PR曲线计算得出的AP等数据有可能会出现1%~2%左右的误差，但是并不知道是为什么，如果有发现如何改进，欢迎讨论。
+
+本次修改使用了Grad_CAM以及 YOLOV5的metrics.py
+
+主要新增、改动文件 新增 metrics.py  draw_cam.py 修改 yolox/utils/__init__.py   yolox/evaluators/coco_evaluator.py  tools/demo.py 
+
+感谢：YOLOX作者提供的帮助 
+      B站UP主   七方禁行
+      YOLOV5作者
+      Grad_CAM作者
+      
+## Instructions
+
+Installing my yolox is the same as normal yolox
+```shell
+cd YOLOX
+pip3 insatll yolox -v -e.
+```
+
+If you want to use CAM, modify base_cam.py under Grad_CAM  .
+
+The modified version of base_cam.py is now in your root directory.
+
+The CAM is generated as follows：
+
+Currently only one image can be generated at a time . 
+Modify the CAM save path and select which layer of the model the CAM is displayed ,Please modify yolox/utils/draw_cam.py demo.py .
+
+target_layer can modify the layer that is displayed and cv2.imwrite(f'/xxxx/xxx/xxxx', visualization) lets you change the save path.
+
+
+!!!Warning !!!!  Currently only test_size=640*640 is supported
+
+
+```shell
+python tools/demo.py image 
+```
+
+
+Confusion matrix as well as curve output methods such as PR
+```shell
+python tools/eval.py
+```
+
+
+The save path for the generated images is changed in yolox/evaluators/coco_evaluator.py save_dir = "xxxxxxx"
+
+Modify the demo.py and eval.py parameters yourself 
+
+There are problems, confusion matrix and PR curve calculation of AP data may be about 1% to 2% error, but we do not know why. If you find out how to improve, welcome to discuss.
+This modification uses Grad_CAM and metrics.py from YOLOV5
+
+new .py :metrics.py  draw_cam.py  change yolox/utils/__init__.py   yolox/evaluators/coco_evaluator.py  tools/demo.py 
+
+
+Thanks：YOLOX作者提供的帮助 
+        B站UP主   七方禁行
+        YOLOV5作者
+        Grad_CAM作者
 
 ## Benchmark
 
