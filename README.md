@@ -1,7 +1,11 @@
 <div align="center"><img src="assets/logo.png" width="350"></div>
 
+
 ## Updates!!
 * 【2023/03/21】 I  add Confusion matrix F1_curve P_curve PR_curve R_curve Grad-CAM in YOLOX  新增了混淆矩阵PR曲线F1曲线热力图等东西
+## 如果你觉得对你有用请点个Star吧 感谢QAQ  
+
+## Click on "Star" if you think it will help you  Thanks！！！！！
 ## 中文说明    （Instructions in English are below）
 
 安装yolox 和一般yolox一样
