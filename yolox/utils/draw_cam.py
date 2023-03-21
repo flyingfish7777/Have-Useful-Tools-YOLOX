@@ -20,7 +20,7 @@ def get_cam(model, image_tensor, image_path, test_size):
     # 3. 构建输入图像的Tensor形式
     rgb_img = cv2.imread(image_path, 1)[:, :, ::-1]  # 1是读取rgb
     if test_size is not None:
-        rgb_img = cv2.resize(rgb_img, [test_size, test_size])
+        rgb_img = cv2.resize(rgb_img, [test_size[0], test_size[1]])
     rgb_img = np.float32(rgb_img) / 255
     #
     # # preprocess_image作用：归一化图像，并转成tensor
